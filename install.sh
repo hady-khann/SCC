@@ -37,7 +37,7 @@ fi
 echo "install....."
 # Run modular bashrc scripts (these modify files in /etc/)
 bash "$WORKDIR/bashrc/dkr-bashrc"
-bash "$WORKDIR/bashrc/doco-bashrc"
+bash "$WORKDIR/bashrc/dc-bashrc"
 bash "$WORKDIR/bashrc/git-bashrc"
 bash "$WORKDIR/bashrc/tmx-bashrc"
 bash "$WORKDIR/bashrc/k8s-bashrc"

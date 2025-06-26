@@ -1,6 +1,6 @@
 #!/bin/bash
 
-tee /etc/scc/.doco-bashrc > /dev/null << 'EOF'
+tee /etc/scc/.dc-bashrc > /dev/null << 'EOF'
 #!/bin/bash
 
 

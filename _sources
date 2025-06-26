@@ -6,8 +6,8 @@ if [ -f /etc/scc/.dkr-bashrc ]; then
 fi
 
 # docker-compose
-if [ -f /etc/scc/.doco-bashrc ]; then
-  source /etc/scc/.doco-bashrc
+if [ -f /etc/scc/.dc-bashrc ]; then
+  source /etc/scc/.dc-bashrc
 fi
 
 # git
