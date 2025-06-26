@@ -17,12 +17,19 @@ function dnetworks { docker network ls; }
 function dclean { docker system prune -af; }
 function dimages { docker image ls; }
 
+function dbuild { docker build .; }
+function dc-logs { docker logs "$1" -f; }
+
 # Docker compose shortcuts
-function dc-build { docker compose build .; }
-function dc-up { docker compose up -d; }
-function dc-down { docker compose down; }
-function dc-restart { docker compose restart; }
-function dc-logs { docker compose logs -f; }
-function dc-ps { docker compose ps; }
+function dc-up { docker compose up -f "$1" -d; }
+function dc-down { docker compose -f "$1" down; }
+function dc-restart() { 
+    docker compose -f "$1" down; 
+    docker compose -f "$1" up; -d 
+}
+function dc-reset() { 
+    docker compose -f "$1" down; 
+    docker compose -f "$1" up --force-recreate -d; 
+}
 
 EOF
