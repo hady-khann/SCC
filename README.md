@@ -1,3 +1,5 @@
+[![License: MIT](https://img.shields.io/badge/License-MIT-red.svg)](https://opensource.org/licenses/MIT)
+
 # 🛠️ SCC – Simple Custom Commands
 
 **SCC** is a modular, system-wide shell command enhancer designed for DevOps engineers, SREs, and power users. It provides prebuilt, categorized Bash command extensions for tools such as Docker, Git, tmux, Kubernetes, and more — all maintained cleanly under `/etc/scc`.
@@ -32,7 +34,8 @@ bash <(curl -Ls https://raw.githubusercontent.com/hady-khann/SCC/main/install.sh
 
 ## 🐳 Docker Commands (`.dkr-bashrc`)
 
-This module provides convenient shell functions for interacting with Docker and Docker Compose. Once SCC is installed, these commands are auto-sourced into your shell from `/etc/scc/.dkr-bashrc`.
+This module provides convenient shell functions for interacting with Docker and Docker Compose.
+Once SCC is installed, these commands are auto-sourced into your shell from `/etc/scc/.dkr-bashrc`.
 
 ---
 
@@ -79,3 +82,24 @@ These functions are saved in:
 
 ```bash
 /etc/scc/.dkr-bashrc
+
+
+
+
+
+
+---
+
+## 🤝 How to Contribute  
+We welcome contributions! Here’s how:  
+
+1. **Fork** the repo and create a branch (`git checkout -b feature/your-feature`)  
+2. **Commit** your changes (`git commit -m 'Add some feature'`)  
+3. **Push** to the branch (`git push origin feature/your-feature`)  
+4. Open a **Pull Request**  
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.  
+
+## 📜 License  
+SCC is [MIT licensed](LICENSE).  
+[MIT](LICENSE) © [Hady Khann](https://github.com/hady-khann)
