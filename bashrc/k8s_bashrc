@@ -1,0 +1,475 @@
+#!/bin/bash
+
+tee /etc/scc/.k8s_bashrc > /dev/null << 'EOF'
+#!/bin/bash
+
+# =====================
+# Minikube (m)
+# =====================
+
+# base m <args>
+m() {
+  if ! command -v minikube &> /dev/null; then
+    echo "Error: minikube is not installed or not in PATH" >&2
+    return 1
+  fi
+
+  if [ $# -eq 0 ]; then
+    echo "Usage: m <minikube-subcommand> [args...]" >&2
+    echo "Example: m addons list | m start --driver=docker"
+    return 1
+  fi
+
+  minikube "$@"
+}
+
+# Core
+m_up() { minikube start; }
+m_down() { minikube stop; }
+m_del() { minikube delete; }
+m_stat() { minikube status; }
+m_ip() { minikube ip; }
+m_dash() { minikube dashboard; }
+m_ssh() { minikube ssh; }
+m_mnt() { minikube mount "$@"; }
+
+# Config
+m_cfg() { minikube config view; }
+m_cfg_set() { minikube config set "$1" "$2"; }
+m_cfg_unset() { minikube config unset "$1"; }
+
+# Addons
+m_add_ls() { minikube addons list; }
+m_add_on() { minikube addons enable "$1"; }
+m_add_off() { minikube addons disable "$1"; }
+
+# Services
+m_svc_ls() { minikube service list; }
+m_svc_url() { minikube service "$1" --url; }
+m_svc_open() { minikube service "$1"; }
+
+# Logs
+m_lg() { minikube logs; }
+m_lgf() { minikube logs -f; }
+m_lgp() { minikube logs --problems; }
+
+# Advanced
+m_pause() { minikube pause; }
+m_unpause() { minikube unpause; }
+m_tun() { minikube tunnel; }
+m_prof() { minikube profile "$1"; }
+m_cp() { minikube cp "$1" "$2"; }
+m_img_load() { minikube image load "$1"; }
+m_img_rm() { minikube image rm "$1"; }
+m_img_ls() { minikube image ls; }
+
+# =====================
+# Kubectl (k)
+# =====================
+
+# base m <args>
+k() {
+  if ! command -v kubectl &> /dev/null; then
+    echo "Error: kubectl is not installed or not in PATH" >&2
+    return 1
+  fi
+
+  if [ $# -eq 0 ]; then
+    echo "Usage: k <kubectl-subcommand> [args...]" >&2
+    echo "Example: k get pods | k apply -f file.yaml"
+    return 1
+  fi
+
+  kubectl "$@"
+}
+
+# Core
+k_cfg() { kubectl config "$@"; }
+k_ci() { kubectl cluster-info; }
+k_ver() { kubectl version; }
+k_api() { kubectl api-resources; }
+k_apis() { kubectl api-versions; }
+
+# Context
+k_ctx() { kubectl config current-context; }
+k_ctx_ls() { kubectl config get-contexts; }
+k_ctx_use() { kubectl config use-context "$1"; }
+k_ctx_set() { kubectl config set-context "$1"; }
+k_ns() { kubectl config set-context --current --namespace="$1"; }
+k_ns_cur() { kubectl config view --minify --output 'jsonpath={..namespace}'; echo; }
+
+# CRUD
+k_g() { kubectl get "$@"; }
+k_d() { kubectl describe "$@"; }
+k_c() { kubectl create "$@"; }
+k_a() { kubectl apply "$@"; }
+k_del() { kubectl delete "$@"; }
+k_e() { kubectl edit "$@"; }
+k_ex() { kubectl explain "$@"; }
+
+# Resources
+k_p() { kubectl get pods "$@"; }
+k_pw() { kubectl get pods -w; }
+k_pwide() { kubectl get pods -o wide; }
+k_pall() { kubectl get pods --all-namespaces; }
+k_no() { kubectl get nodes; }
+k_nowide() { kubectl get nodes -o wide; }
+k_dep() { kubectl get deployments; }
+k_rs() { kubectl get replicasets; }
+k_svc() { kubectl get services; }
+k_ing() { kubectl get ingress; }
+k_cm() { kubectl get configmaps; }
+k_sec() { kubectl get secrets; }
+k_pv() { kubectl get pv; }
+k_pvc() { kubectl get pvc; }
+k_sc() { kubectl get sc; }
+k_sa() { kubectl get serviceaccounts; }
+k_crd() { kubectl get crd; }
+k_j() { kubectl get jobs; }
+k_cj() { kubectl get cronjobs; }
+
+# Logs
+k_lg() { kubectl logs "$@"; }
+k_lgf() { kubectl logs -f "$@"; }
+k_lgp() { kubectl logs -p "$@"; }
+k_lga() { kubectl logs --all-containers "$@"; }
+k_top_p() { kubectl top pod; }
+k_top_n() { kubectl top node; }
+k_ev() { kubectl get events; }
+k_evw() { kubectl get events -w; }
+k_eva() { kubectl get events --all-namespaces; }
+k_dbg() { kubectl debug "$@"; }
+
+# Networking
+k_pf() { kubectl port-forward "$@"; }
+k_px() { kubectl proxy; }
+
+# Exec
+k_ex() { kubectl exec -it "$@"; }
+k_exb() { kubectl exec -it "$1" -- bash; }
+k_exs() { kubectl exec -it "$1" -- sh; }
+k_att() { kubectl attach -it "$@"; }
+k_run() { kubectl run "$@"; }
+
+# Management
+k_scale() { kubectl scale "$@"; }
+k_auto() { kubectl autoscale "$@"; }
+k_roll() { kubectl rollout "$@"; }
+k_roll_stat() { kubectl rollout status "$@"; }
+k_roll_hist() { kubectl rollout history "$@"; }
+k_roll_undo() { kubectl rollout undo "$@"; }
+k_cord() { kubectl cordon "$@"; }
+k_uncord() { kubectl uncordon "$@"; }
+k_drn() { kubectl drain "$@"; }
+k_tnt() { kubectl taint "$@"; }
+
+# Output
+k_gy() { kubectl get "$@" -o yaml; }
+k_gj() { kubectl get "$@" -o json; }
+k_diff() { kubectl diff -f "$@"; }
+k_exp() { kubectl get "$@" -o yaml --export; }
+
+# Updates
+k_patch() { kubectl patch "$@"; }
+k_rep() { kubectl replace "$@"; }
+k_lbl() { kubectl label "$@"; }
+k_ann() { kubectl annotate "$@"; }
+
+# Advanced
+k_auth() { kubectl auth "$@"; }
+k_cert() { kubectl certificate "$@"; }
+k_top() { kubectl top "$@"; }
+k_wait() { kubectl wait "$@"; }
+
+# Plugins
+k_plg() { kubectl plugin "$@"; }
+
+# Custom
+k_gc() { kubectl get "$1" -o custom-columns="$2"; }
+k_gw() { kubectl get "$1" -o wide; }
+k_gj() { kubectl get "$1" -o jsonpath="$2"; }
+
+# Watch
+k_w() { watch -n 1 "kubectl get $@"; }
+k_wp() { watch -n 1 "kubectl get pods $@"; }
+k_wn() { watch -n 1 "kubectl get nodes $@"; }
+
+# =====================
+# Combined
+# =====================
+
+# Minikube
+m_up_all() { m_up; m_stat; k_ci; }
+m_down_all() { m_down; m_del; }
+
+# Resources
+k_ga() { kubectl get all --all-namespaces; }
+k_wa() { watch -n 1 "kubectl get all,ing,pv,pvc,cm,sec,sa"; }
+
+# Pods
+k_pi() {
+  kubectl get pods -o wide
+  kubectl get pods -o custom-columns="NAME:.metadata.name,STATUS:.status.phase,NODE:.spec.nodeName,IP:.status.podIP"
+}
+
+# Nodes
+k_ni() {
+  kubectl get nodes -o wide
+  kubectl get nodes -o custom-columns="NAME:.metadata.name,STATUS:.status.conditions[?(@.type=='Ready')].status,ROLES:.metadata.labels.kubernetes\.io/role,INTERNAL-IP:.status.addresses[?(@.type=='InternalIP')].address,KERNEL:.status.nodeInfo.kernelVersion,OS:.status.nodeInfo.osImage"
+}
+
+# Logs
+k_lgd() { kubectl logs deployment/"$1" --all-containers --follow; }
+
+# Counts
+k_cnt() {
+  kubectl get pods --all-namespaces -o json | jq -r '.items | group_by(.metadata.namespace) | map({namespace: .[0].metadata.namespace, count: length}) | sort_by(.count) | reverse[] | "\(.namespace): \(.count)"'
+}
+
+# Images
+k_imgs() {
+  kubectl get pods --all-namespaces -o jsonpath="{.items[*].spec.containers[*].image}" | tr -s '[[:space:]]' '\n' | sort | uniq -c | sort -nr
+}
+
+# Bulk ops
+k_gar() { kubectl get "$1" --all-namespaces; }
+k_dar() { kubectl describe "$1" --all-namespaces; }
+k_delall() { kubectl delete "$1" --all; }
+k_delallns() { kubectl delete "$1" --all --all-namespaces; }
+
+# Networking
+k_pi() { kubectl get pods -o custom-columns="NAME:.metadata.name,NODE:.spec.nodeName,IP:.status.podIP"; }
+k_ep() { kubectl get endpoints; }
+
+# Storage
+k_pvcs() { kubectl get pvc -o custom-columns="NAME:.metadata.name,STATUS:.status.phase,VOLUME:.spec.volumeName,STORAGECLASS:.spec.storageClassName"; }
+k_pvs() { kubectl get pv -o custom-columns="NAME:.metadata.name,STATUS:.status.phase,CLAIM:.spec.claimRef.name,STORAGECLASS:.spec.storageClassName"; }
+
+# Metadata
+k_gl() { kubectl get all --show-labels; }
+
+# Resources
+k_pr() {
+  kubectl get pods -o custom-columns="NAME:.metadata.name,CPU_REQ:.spec.containers[*].resources.requests.cpu,MEM_REQ:.spec.containers[*].resources.requests.memory,CPU_LIM:.spec.containers[*].resources.limits.cpu,MEM_LIM:.spec.containers[*].resources.limits.memory"
+}
+
+# Nodes
+k_nr() {
+  kubectl get nodes -o custom-columns="NAME:.metadata.name,CPU_CAP:.status.capacity.cpu,CPU_ALLOC:.status.allocatable.cpu,MEM_CAP:.status.capacity.memory,MEM_ALLOC:.status.allocatable.memory"
+}
+
+# Pod status
+k_ps() {
+  kubectl get pods -o custom-columns="NAME:.metadata.name,STATUS:.status.phase,READY:.status.containerStatuses[*].ready"
+}
+
+# Services
+k_ss() { kubectl get svc -o custom-columns="NAME:.metadata.name,SELECTOR:.spec.selector"; }
+
+# Ingress
+k_ih() { kubectl get ingress -o custom-columns="NAME:.metadata.name,HOSTS:.spec.rules[*].host"; }
+
+# ConfigMaps
+k_ck() { kubectl get cm -o custom-columns="NAME:.metadata.name,KEYS:.data"; }
+
+# Secrets
+k_sk() { kubectl get secrets -o custom-columns="NAME:.metadata.name,TYPE:.type,KEYS:.data"; }
+
+# Security
+k_psec() {
+  kubectl get pods -o custom-columns="NAME:.metadata.name,SERVICE_ACCOUNT:.spec.serviceAccountName,SECURITY_CONTEXT:.spec.securityContext"
+}
+
+
+# =====================
+# Help Functions
+# =====================
+
+
+k_help() {
+  echo -e "\n\033[1;34mKUBECTL SHORTCUTS (k_*)\033[0m"
+  echo -e "\033[1;36mCore Commands:\033[0m"
+  echo "  k <kubectl-subcommand> [args...]"
+  echo "    ↳ Shortcut for 'kubectl'"
+  echo "    ℹ Examples:"
+  echo "      k get pods"
+  echo "      k apply -f deploy.yaml"
+  echo "      k logs my-pod"
+  echo "      k describe svc my-service"
+  echo "      k config get-contexts"
+
+  echo -e "\n\033[1;36mCluster Info:\033[0m"
+  echo "  k_cfg       - Manage kubeconfig"
+  echo "  k_ci        - Show cluster info"
+  echo "  k_ver       - Show version"
+  echo "  k_api       - List API resources"
+  echo "  k_apis      - List API versions"
+
+  echo -e "\n\033[1;36mContext Management:\033[0m"
+  echo "  k_ctx       - Show current context"
+  echo "  k_ctx_ls    - List all contexts"
+  echo "  k_ctx_use   - Switch context"
+  echo "  k_ctx_set   - Set context properties"
+  echo "  k_ns        - Set namespace"
+  echo "  k_ns_cur    - Show current namespace"
+
+  echo -e "\n\033[1;36mCRUD Operations:\033[0m"
+  echo "  k_g         - Get resources"
+  echo "  k_d         - Describe resources"
+  echo "  k_c         - Create resources"
+  echo "  k_a         - Apply manifest"
+  echo "  k_del       - Delete resources"
+  echo "  k_e         - Edit resource"
+  echo "  k_explain   - Explain resource"
+
+  echo -e "\n\033[1;36mQuick Access:\033[0m"
+  echo "  k_p         - Get pods"
+  echo "  k_pw        - Watch pods"
+  echo "  k_pwide     - Get pods (wide)"
+  echo "  k_pall      - All pods (all namespaces)"
+  echo "  k_no        - Get nodes"
+  echo "  k_nowide    - Nodes (wide)"
+  echo "  k_dep       - Get deployments"
+  echo "  k_rs        - Get replicasets"
+  echo "  k_svc       - Get services"
+  echo "  k_ing       - Get ingress"
+  echo "  k_cm        - Get configmaps"
+  echo "  k_sec       - Get secrets"
+  echo "  k_pv        - Get persistent volumes"
+  echo "  k_pvc       - Get volume claims"
+  echo "  k_sc        - Get storage classes"
+  echo "  k_sa        - Get service accounts"
+  echo "  k_crd       - Get CRDs"
+  echo "  k_j         - Get jobs"
+  echo "  k_cj        - Get cronjobs"
+
+  echo -e "\n\033[1;36mLogs & Monitoring:\033[0m"
+  echo "  k_lg        - Show logs"
+  echo "  k_lgf       - Follow logs"
+  echo "  k_lgp       - Previous logs"
+  echo "  k_lga       - All container logs"
+  echo "  k_top_p     - Pod metrics"
+  echo "  k_top_n     - Node metrics"
+  echo "  k_ev        - Events"
+  echo "  k_evw       - Watch events"
+  echo "  k_eva       - Events (all namespaces)"
+  echo "  k_dbg       - Debug pod"
+
+  echo -e "\n\033[1;36mNetworking:\033[0m"
+  echo "  k_pf        - Port forward"
+  echo "  k_px        - Start proxy"
+
+  echo -e "\n\033[1;36mExecution:\033[0m"
+  echo "  k_ex        - Exec in pod"
+  echo "  k_exb       - Bash in pod"
+  echo "  k_exs       - Sh in pod"
+  echo "  k_att       - Attach to container"
+  echo "  k_run       - Run pod"
+
+  echo -e "\n\033[1;36mRollouts & Scale:\033[0m"
+  echo "  k_scale     - Scale deployment"
+  echo "  k_auto      - Autoscaler"
+  echo "  k_roll      - Rollout"
+  echo "  k_roll_stat - Rollout status"
+  echo "  k_roll_hist - Rollout history"
+  echo "  k_roll_undo - Rollout undo"
+  echo "  k_cord      - Cordon node"
+  echo "  k_uncord    - Uncordon node"
+  echo "  k_drn       - Drain node"
+  echo "  k_tnt       - Taint node"
+
+  echo -e "\n\033[1;36mOutput:\033[0m"
+  echo "  k_gy        - YAML output"
+  echo "  k_gj        - JSON output"
+  echo "  k_diff      - Show diff"
+  echo "  k_exp       - Export resource"
+
+  echo -e "\n\033[1;36mAdvanced Views:\033[0m"
+  echo "  k_ga        - All resources (all ns)"
+  echo "  k_wa        - Watch all"
+  echo "  k_pi        - Pod IPs"
+  echo "  k_ni        - Node info"
+  echo "  k_lgd       - Logs by deployment"
+  echo "  k_cnt       - Pod count by ns"
+  echo "  k_imgs      - Container images"
+  echo "  k_gar       - Get all of resource"
+  echo "  k_dar       - Describe all of resource"
+  echo "  k_delall    - Delete all of resource"
+  echo "  k_delallns  - Delete all in all ns"
+  echo "  k_ep        - Endpoints"
+  echo "  k_gl        - Get by label"
+  echo "  k_pr        - Pod resource usage"
+  echo "  k_nr        - Node resources"
+  echo "  k_ps        - Pod status"
+  echo "  k_ss        - Service selectors"
+  echo "  k_ih        - Ingress hosts"
+  echo "  k_ck        - ConfigMap keys"
+  echo "  k_sk        - Secret keys"
+  echo "  k_psec      - Pod security context"
+
+  echo -e "\n\033[1;36mWatchers:\033[0m"
+  echo "  k_w         - Watch resource"
+  echo "  k_wp        - Watch pods"
+  echo "  k_wn        - Watch nodes"
+}
+
+
+m_help() {
+  echo -e "\n\033[1;34mMINIKUBE SHORTCUTS (m_*)\033[0m"
+  echo -e "\033[1;36mCore Commands:\033[0m"
+  echo "  m <minikube-subcommand> [args...]"
+  echo "    ↳ Shortcut for 'minikube'"
+  echo "    ℹ Examples:"
+  echo "      m start --driver=docker"
+  echo "      m status"
+  echo "      m addons list"
+  echo "      m addons enable ingress"
+  echo "      m delete --purge"
+
+  echo -e "\n\033[1;36mCluster Lifecycle:\033[0m"
+  echo "  m_up       - Start minikube cluster"
+  echo "  m_down     - Stop minikube cluster"
+  echo "  m_del      - Delete minikube cluster"
+  echo "  m_stat     - Show cluster status"
+  echo "  m_ip       - Get cluster IP address"
+  echo "  m_dash     - Open dashboard"
+  echo "  m_ssh      - SSH into minikube VM"
+  echo "  m_mnt      - Mount host directory to VM"
+
+  echo -e "\n\033[1;36mConfiguration:\033[0m"
+  echo "  m_cfg       - View current config"
+  echo "  m_cfg_set   - Set config property"
+  echo "  m_cfg_unset - Unset config property"
+
+  echo -e "\n\033[1;36mAddons:\033[0m"
+  echo "  m_add_ls   - List available addons"
+  echo "  m_add_on   - Enable an addon"
+  echo "  m_add_off  - Disable an addon"
+
+  echo -e "\n\033[1;36mServices:\033[0m"
+  echo "  m_svc_ls   - List services"
+  echo "  m_svc_url  - Get service URL"
+  echo "  m_svc_open - Open service in browser"
+
+  echo -e "\n\033[1;36mLogs:\033[0m"
+  echo "  m_lg       - Show logs"
+  echo "  m_lgf      - Follow logs"
+  echo "  m_lgp      - Show problem logs"
+
+  echo -e "\n\033[1;36mAdvanced:\033[0m"
+  echo "  m_pause    - Pause cluster"
+  echo "  m_unpause  - Unpause cluster"
+  echo "  m_tun      - Create network tunnel"
+  echo "  m_prof     - Set active profile"
+  echo "  m_cp       - Copy files to/from VM"
+  echo "  m_img_load - Load image into cluster"
+  echo "  m_img_rm   - Remove image from cluster"
+  echo "  m_img_ls   - List loaded images"
+
+  echo -e "\n\033[1;36mCombined:\033[0m"
+  echo "  m_up_all   - Start cluster and show status"
+  echo "  m_down_all - Stop and delete cluster"
+}
+
+
+EOF

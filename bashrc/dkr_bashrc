@@ -1,0 +1,28 @@
+#!/bin/bash
+
+tee /etc/scc/.dkr_bashrc > /dev/null << 'EOF'
+#!/bin/bash
+
+# Docker ps shortcuts
+function dps { docker ps; }
+function dpsa { docker ps -a; }
+function dpss { docker ps --format "table {{.ID}}\t{{.Ports}}\t{{.Status}}\t{{.Names}}\t{{.Networks}}"; }
+function wdps { watch -e docker ps; }
+function wdpss { watch -e "docker ps --format 'table {{.ID}}\t{{.Ports}}\t{{.Status}}\t{{.Names}}\t{{.Networks}}'"; }
+
+# Docker system management
+function dstats { docker stats; }
+function dvolumes { docker volume ls; }
+function dnetworks { docker network ls; }
+function dclean { docker system prune -af; }
+function dimages { docker image ls; }
+
+# Docker compose shortcuts
+function dc_build { docker compose build .; }
+function dc_up { docker compose up -d; }
+function dc_down { docker compose down; }
+function dc_restart { docker compose restart; }
+function dc_logs { docker compose logs -f; }
+function dc_ps { docker compose ps; }
+
+EOF

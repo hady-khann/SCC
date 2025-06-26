@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# docker
+if [ -f /etc/scc/.dkr_bashrc ]; then
+  source /etc/scc/.dkr_bashrc
+fi
+
+# docker-compose
+if [ -f /etc/scc/.doco_bashrc ]; then
+  source /etc/scc/.doco_bashrc
+fi
+
+# git
+if [ -f /etc/scc/.git_bashrc ]; then
+  source /etc/scc/.git_bashrc
+fi
+
+# tmux
+if [ -f /etc/scc/.tmx_bashrc ]; then
+  source /etc/scc/.tmx_bashrc
+fi
+
+# kubernetes and minikube
+if [ -f /etc/scc/.k8s_bashrc ]; then
+  source /etc/scc/.k8s_bashrc
+fi
