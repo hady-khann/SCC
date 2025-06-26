@@ -10,7 +10,7 @@ rm -rf "$WORKDIR"
 mkdir -p "$WORKDIR" "$PKGDIR"
 
 # Clone repo to temp
-git clone https://github.com/your-username/SCC.git "$WORKDIR"
+git clone https://github.com/hady-khann/SCC.git "$WORKDIR"
 
 # Always overwrite /etc/scc/.sources
 cp "$WORKDIR/_sources" "$PKGDIR/.sources"
