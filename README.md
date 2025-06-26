@@ -25,3 +25,57 @@
 
 ```bash
 bash <(curl -Ls https://raw.githubusercontent.com/hady-khann/SCC/main/install.sh)
+
+
+
+
+
+## 🐳 Docker Commands (`.dkr_bashrc`)
+
+This module provides convenient shell functions for interacting with Docker and Docker Compose. Once SCC is installed, these commands are auto-sourced into your shell from `/etc/scc/.dkr_bashrc`.
+
+---
+
+### 🔍 Docker Containers
+
+| Command   | Description |
+|-----------|-------------|
+| `dps`     | Show running containers (`docker ps`) |
+| `dpsa`    | Show all containers, including stopped (`docker ps -a`) |
+| `dpss`    | Show a simplified, formatted container list |
+| `wdps`    | Watch running containers in real-time |
+| `wdpss`   | Watch a formatted container list in real-time |
+
+---
+
+### 📊 Docker System Monitoring
+
+| Command       | Description |
+|---------------|-------------|
+| `dstats`      | Live stats for all containers |
+| `dvolumes`    | List Docker volumes |
+| `dnetworks`   | List Docker networks |
+| `dclean`      | Clean all unused Docker resources (volumes, networks, images, stopped containers) |
+| `dimages`     | List all local Docker images |
+
+---
+
+### ⚙️ Docker Compose Shortcuts
+
+| Command       | Description |
+|---------------|-------------|
+| `dc_build`    | Build the current Docker Compose services |
+| `dc_up`       | Start services in detached mode |
+| `dc_down`     | Stop and remove services |
+| `dc_restart`  | Restart all services |
+| `dc_logs`     | Follow logs from services (`-f` for tailing) |
+| `dc_ps`       | Show current status of Compose services |
+
+---
+
+### 📁 File Location
+
+These functions are saved in:
+
+```bash
+/etc/scc/.dkr_bashrc
