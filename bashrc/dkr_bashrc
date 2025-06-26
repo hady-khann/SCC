@@ -3,7 +3,7 @@
 tee /etc/scc/.dkr-bashrc > /dev/null << 'EOF'
 #!/bin/bash
 
-# Docker ps shortcuts
+# Docker monitor shortcuts
 function dps { docker ps; }
 function dpsa { docker ps -a; }
 function dpss { docker ps --format "table {{.ID}}\t{{.Ports}}\t{{.Status}}\t{{.Names}}\t{{.Networks}}"; }
@@ -23,6 +23,7 @@ function dc-logs { docker logs "$1" -f; }
 # Docker compose shortcuts
 function dc-up { docker compose up -f "$1" -d; }
 function dc-down { docker compose -f "$1" down; }
+
 function dc-restart() { 
     docker compose -f "$1" down; 
     docker compose -f "$1" up; -d 
