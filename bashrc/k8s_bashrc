@@ -24,8 +24,8 @@ m() {
 }
 
 # Core
-m-up() { minikube start; }
-m-down() { minikube stop; }
+m-strt() { minikube start; }
+m-stp() { minikube stop; }
 m-del() { minikube delete; }
 m-stat() { minikube status; }
 m-ip() { minikube ip; }
@@ -40,8 +40,8 @@ m-cfg-unset() { minikube config unset "$1"; }
 
 # Addons
 m-add-ls() { minikube addons list; }
-m-add-on() { minikube addons enable "$1"; }
-m-add-off() { minikube addons disable "$1"; }
+m-add-en() { minikube addons enable "$1"; }
+m-add-dis() { minikube addons disable "$1"; }
 
 # Services
 m-svc-ls() { minikube service list; }
@@ -54,8 +54,8 @@ m-lgf() { minikube logs -f; }
 m-lgp() { minikube logs --problems; }
 
 # Advanced
-m-pause() { minikube pause; }
-m-unpause() { minikube unpause; }
+m-pus() { minikube pause; }
+m-unpus() { minikube unpause; }
 m-tun() { minikube tunnel; }
 m-prof() { minikube profile "$1"; }
 m-cp() { minikube cp "$1" "$2"; }
@@ -87,15 +87,15 @@ k() {
 k-cfg() { kubectl config "$@"; }
 k-ci() { kubectl cluster-info; }
 k-ver() { kubectl version; }
-k-api() { kubectl api-resources; }
-k-apis() { kubectl api-versions; }
+k-api-res() { kubectl api-resources; }
+k-api-ver() { kubectl api-versions; }
 
 # Context
 k-ctx() { kubectl config current-context; }
 k-ctx-ls() { kubectl config get-contexts; }
 k-ctx-use() { kubectl config use-context "$1"; }
 k-ctx-set() { kubectl config set-context "$1"; }
-k-ns() { kubectl config set-context --current --namespace="$1"; }
+k-ctx-ns() { kubectl config set-context --current --namespace="$1"; }
 k-ns-cur() { kubectl config view --minify --output 'jsonpath={..namespace}'; echo; }
 
 # CRUD
