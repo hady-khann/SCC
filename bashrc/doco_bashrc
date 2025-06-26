@@ -170,10 +170,10 @@ doco_middleweb-frontend_logs() {
 
 # ALL functions
 doco_all_down() {
-  bash /root/scripts/doco_all_down.sh
+  bash /etc/scc//doco_all_down.sh
 }
 doco_all_up() {
-  bash /root/scripts/doco_all_up.sh
+  bash /etc/scc//doco_all_up.sh
 }
 doco_all_reset() {
   doco_all_down
@@ -255,7 +255,7 @@ function dc_ps { docker compose ps; }
 
 EOF
 
-tee /root/scripts/doco_all_down.sh > /dev/null << 'EOF'
+tee /etc/scc//doco_all_down.sh > /dev/null << 'EOF'
 #!/bin/bash
 
 docker compose --env-file /opt/docker/gitlab/.env -f /opt/docker/gitlab/gitlab-compose.yml down
@@ -271,7 +271,7 @@ docker compose -f /home/jenkins/jobs/compose/middleweb-backend.yml down
 docker-compose -f /opt/docker/nginx/nginx-docker-compose.yml down
 EOF
 
-tee /root/scripts/doco_all_up.sh > /dev/null << 'EOF'
+tee /etc/scc//doco_all_up.sh > /dev/null << 'EOF'
 #!/bin/bash
 
 docker compose --env-file /opt/docker/gitlab/.env -f /opt/docker/gitlab/postgresql-compose.yml up --force-recreate -d
@@ -288,7 +288,7 @@ docker-compose -f /opt/docker/nginx/nginx-docker-compose.yml up --force-recreate
 EOF
 
 
-tee /root/scripts/doco_nginx_up.sh > /dev/null << 'EOF'
+tee /etc/scc//doco_nginx_up.sh > /dev/null << 'EOF'
 #!/bin/bash
 
 docker-compose -f /opt/docker/nginx/nginx-docker-compose.yml up --force-recreate -d
