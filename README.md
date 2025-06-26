@@ -30,9 +30,9 @@ bash <(curl -Ls https://raw.githubusercontent.com/hady-khann/SCC/main/install.sh
 
 
 
-## 🐳 Docker Commands (`.dkr_bashrc`)
+## 🐳 Docker Commands (`.dkr-bashrc`)
 
-This module provides convenient shell functions for interacting with Docker and Docker Compose. Once SCC is installed, these commands are auto-sourced into your shell from `/etc/scc/.dkr_bashrc`.
+This module provides convenient shell functions for interacting with Docker and Docker Compose. Once SCC is installed, these commands are auto-sourced into your shell from `/etc/scc/.dkr-bashrc`.
 
 ---
 
@@ -64,12 +64,12 @@ This module provides convenient shell functions for interacting with Docker and 
 
 | Command       | Description |
 |---------------|-------------|
-| `dc_build`    | Build the current Docker Compose services |
-| `dc_up`       | Start services in detached mode |
-| `dc_down`     | Stop and remove services |
-| `dc_restart`  | Restart all services |
-| `dc_logs`     | Follow logs from services (`-f` for tailing) |
-| `dc_ps`       | Show current status of Compose services |
+| `dc-build`    | Build the current Docker Compose services |
+| `dc-up`       | Start services in detached mode |
+| `dc-down`     | Stop and remove services |
+| `dc-restart`  | Restart all services |
+| `dc-logs`     | Follow logs from services (`-f` for tailing) |
+| `dc-ps`       | Show current status of Compose services |
 
 ---
 
@@ -78,4 +78,4 @@ This module provides convenient shell functions for interacting with Docker and 
 These functions are saved in:
 
 ```bash
-/etc/scc/.dkr_bashrc
+/etc/scc/.dkr-bashrc

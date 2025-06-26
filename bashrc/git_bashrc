@@ -1,6 +1,6 @@
 #!/bin/bash
 
-tee /etc/scc/.git_bashrc > /dev/null << 'EOF'
+tee /etc/scc/.git-bashrc > /dev/null << 'EOF'
 #!/bin/bash
 
 # Git shortcuts

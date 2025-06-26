@@ -1,183 +1,183 @@
 #!/bin/bash
 
-tee /etc/scc/.doco_bashrc > /dev/null << 'EOF'
+tee /etc/scc/.doco-bashrc > /dev/null << 'EOF'
 #!/bin/bash
 
 # NGINX functions
-doco_nginx_reset() {
+doco-nginx-reset() {
   docker-compose -f /opt/docker/nginx/nginx-docker-compose.yml down
   docker-compose -f /opt/docker/nginx/nginx-docker-compose.yml up --force-recreate -d
 }
-doco_nginx_down() {
+doco-nginx-down() {
   docker-compose -f /opt/docker/nginx/nginx-docker-compose.yml down
 }
-doco_nginx_up() {
+doco-nginx-up() {
   docker-compose -f /opt/docker/nginx/nginx-docker-compose.yml up --force-recreate -d
 }
-doco_nginx_logs() {
+doco-nginx-logs() {
   docker logs nginx -f
 }
 
 # SQLSERVER functions
-doco_sqlserver_reset() {
+doco-sqlserver-reset() {
   docker-compose -f /opt/docker/sqlserver/sqlserver-docker-compose.yml down
   docker-compose -f /opt/docker/sqlserver/sqlserver-docker-compose.yml up --force-recreate -d
 }
-doco_sqlserver_down() {
+doco-sqlserver-down() {
   docker-compose -f /opt/docker/sqlserver/sqlserver-docker-compose.yml down
 }
-doco_sqlserver_up() {
+doco-sqlserver-up() {
   docker-compose -f /opt/docker/sqlserver/sqlserver-docker-compose.yml up --force-recreate -d
 }
-doco_sqlserver_logs() {
+doco-sqlserver-logs() {
   docker logs sqlserver2022 -f
 }
 
 # NEXUS functions
-doco_nexus_reset() {
+doco-nexus-reset() {
   docker-compose -f /opt/docker/nexus/nexus-docker-compose.yml down
   docker-compose -f /opt/docker/nexus/nexus-docker-compose.yml up --force-recreate -d
 }
-doco_nexus_down() {
+doco-nexus-down() {
   docker-compose -f /opt/docker/nexus/nexus-docker-compose.yml down
 }
-doco_nexus_up() {
+doco-nexus-up() {
   docker-compose -f /opt/docker/nexus/nexus-docker-compose.yml up --force-recreate -d
 }
-doco_nexus_logs() {
+doco-nexus-logs() {
   docker logs nexus -f
 }
 
 # JENKINS functions
-doco_jenkins_reset() {
+doco-jenkins-reset() {
   docker-compose -f /opt/docker/jenkins/jenkins-docker-compose.yml down
   docker-compose -f /opt/docker/jenkins/jenkins-docker-compose.yml up --force-recreate -d
 }
-doco_jenkins_down() {
+doco-jenkins-down() {
   docker-compose -f /opt/docker/jenkins/jenkins-docker-compose.yml down
 }
-doco_jenkins_up() {
+doco-jenkins-up() {
   docker-compose -f /opt/docker/jenkins/jenkins-docker-compose.yml up --force-recreate -d
 }
-doco_jenkins_logs() {
+doco-jenkins-logs() {
   docker logs jenkins -f
 }
 
 # GITLAB functions
-doco_gitlab_reset() {
+doco-gitlab-reset() {
   docker compose --env-file /opt/docker/gitlab/.env -f /opt/docker/gitlab/gitlab-compose.yml down
   docker compose --env-file /opt/docker/gitlab/.env -f /opt/docker/gitlab/gitlab-compose.yml up --force-recreate -d
 }
-doco_gitlab_down() {
+doco-gitlab-down() {
   docker compose --env-file /opt/docker/gitlab/.env -f /opt/docker/gitlab/gitlab-compose.yml down
 }
-doco_gitlab_up() {
+doco-gitlab-up() {
   docker compose --env-file /opt/docker/gitlab/.env -f /opt/docker/gitlab/gitlab-compose.yml up --force-recreate -d
 }
-doco_gitlab_logs() {
+doco-gitlab-logs() {
   docker logs gitlab -f
 }
 
 # jira functions
-doco_jira_reset() {
+doco-jira-reset() {
   docker compose --env-file /opt/docker/jira/.env -f /opt/docker/jira/jira-compose.yml down
   docker compose --env-file /opt/docker/jira/.env -f /opt/docker/jira/jira-compose.yml up --force-recreate -d
 }
-doco_jira_down() {
+doco-jira-down() {
   docker compose --env-file /opt/docker/jira/.env -f /opt/docker/jira/jira-compose.yml down
 }
-doco_jira_up() {
+doco-jira-up() {
   docker compose --env-file /opt/docker/jira/.env -f /opt/docker/jira/jira-compose.yml up --force-recreate -d
 }
-doco_jira_logs() {
+doco-jira-logs() {
   docker logs jira -f
 }
 
 # postgres17 functions for gitlab
-doco_postgres17_reset() {
+doco-postgres17-reset() {
   docker compose --env-file /opt/docker/gitlab/.env -f /opt/docker/gitlab/postgresql-compose.yml down
   docker compose --env-file /opt/docker/gitlab/.env -f /opt/docker/gitlab/postgresql-compose.yml up --force-recreate -d
 }
-doco_postgres17_down() {
+doco-postgres17-down() {
   docker compose --env-file /opt/docker/gitlab/.env -f /opt/docker/gitlab/postgresql-compose.yml down
 }
-doco_postgres17_up() {
+doco-postgres17-up() {
   docker compose --env-file /opt/docker/gitlab/.env -f /opt/docker/gitlab/postgresql-compose.yml up --force-recreate -d
 }
-doco_postgres17_logs() {
+doco-postgres17-logs() {
   docker logs gitlab-postgresql -f
 }
 
 # postgres15 functions for jira
-doco_postgresql_reset() {
+doco-postgresql-reset() {
   docker compose --env-file /opt/docker/jira/.env -f /opt/docker/jira/postgresql-compose.yml down
   docker compose --env-file /opt/docker/jira/.env -f /opt/docker/jira/postgresql-compose.yml up --force-recreate -d
 }
-doco_postgres15_down() {
+doco-postgres15-down() {
   docker compose --env-file /opt/docker/jira/.env -f /opt/docker/jira/postgresql-compose.yml down
 }
-doco_postgres15_up() {
+doco-postgres15-up() {
   docker compose --env-file /opt/docker/jira/.env -f /opt/docker/jira/postgresql-compose.yml up --force-recreate -d
 }
-doco_postgres15_logs() {
+doco-postgres15-logs() {
   docker logs jira-postgresql -f
 }
 
 # redis functions
-doco_redis_reset() {
+doco-redis-reset() {
   docker compose --env-file /opt/docker/gitlab/.env -f /opt/docker/gitlab/redis-compose.yml down
   docker compose --env-file /opt/docker/gitlab/.env -f /opt/docker/gitlab/redis-compose.yml up --force-recreate -d
 }
-doco_redis_down() {
+doco-redis-down() {
   docker compose --env-file /opt/docker/gitlab/.env -f /opt/docker/gitlab/redis-compose.yml down
 }
-doco_redis_up() {
+doco-redis-up() {
   docker compose --env-file /opt/docker/gitlab/.env -f /opt/docker/gitlab/redis-compose.yml up --force-recreate -d
 }
-doco_redis_logs() {
+doco-redis-logs() {
   docker logs redis -f
 }
 
 # middleweb-backend functions
-doco_middleweb-backend_reset() {
+doco-middleweb-backend-reset() {
   docker compose -f /home/jenkins/jobs/compose/middleweb-backend.yml down
   docker compose -f /home/jenkins/jobs/compose/middleweb-backend.yml up --force-recreate -d
 }
-doco_middleweb-backend_down() {
+doco-middleweb-backend-down() {
   docker compose -f /home/jenkins/jobs/compose/middleweb-backend.yml down
 }
-doco_middleweb-backend_up() {
+doco-middleweb-backend-up() {
   docker compose -f /home/jenkins/jobs/compose/middleweb-backend.yml up --force-recreate -d
 }
-doco_middleweb-backend_logs() {
+doco-middleweb-backend-logs() {
   docker logs middleweb-backend -f
 }
 
 # middleweb-frontend functions
-doco_middleweb-frontend_reset() {
+doco-middleweb-frontend-reset() {
   docker compose -f /home/jenkins/jobs/compose/middleweb-frontend.yml down
   docker compose -f /home/jenkins/jobs/compose/middleweb-frontend.yml up --force-recreate -d
 }
-doco_middleweb-frontend_down() {
+doco-middleweb-frontend-down() {
   docker compose -f /home/jenkins/jobs/compose/middleweb-frontend.yml down
 }
-doco_middleweb-frontend_up() {
+doco-middleweb-frontend-up() {
   docker compose -f /home/jenkins/jobs/compose/middleweb-frontend.yml up --force-recreate -d
 }
-doco_middleweb-frontend_logs() {
+doco-middleweb-frontend-logs() {
   docker logs middleweb-frontend -f
 }
 
 # ALL functions
-doco_all_down() {
-  bash /etc/scc//doco_all_down.sh
+doco-all-down() {
+  bash /etc/scc//doco-all-down.sh
 }
-doco_all_up() {
-  bash /etc/scc//doco_all_up.sh
+doco-all-up() {
+  bash /etc/scc//doco-all-up.sh
 }
-doco_all_reset() {
-  doco_all_down
-  doco_all_up
+doco-all-reset() {
+  doco-all-down
+  doco-all-up
 }
 
 # Docker ps shortcuts
@@ -195,67 +195,67 @@ function dclean { docker system prune -af; }
 function dimages { docker image ls; }
 
 # Container exec shortcuts
-function dex_nginx { docker exec -it nginx bash; }
-function dex_gitlab { docker exec -it gitlab bash; }
-function dex_jenkins { docker exec -it jenkins bash; }
-function dex_nexus { docker exec -it nexus bash; }
-function dex_sqlserver { docker exec -it sqlserver2022 bash; }
-function dex_jira { docker exec -it jira bash; }
-function dex_postgres15 { docker exec -it jira-postgresql bash; }
-function dex_postgres17 { docker exec -it gitlab-postgresql bash; }
-function dex_redis { docker exec -it redis bash; }
-function dex_middleweb-backend { docker exec -it middleweb-backend bash; }
-function dex_middleweb-frontend { docker exec -it middleweb-frontend bash; }
+function dex-nginx { docker exec -it nginx bash; }
+function dex-gitlab { docker exec -it gitlab bash; }
+function dex-jenkins { docker exec -it jenkins bash; }
+function dex-nexus { docker exec -it nexus bash; }
+function dex-sqlserver { docker exec -it sqlserver2022 bash; }
+function dex-jira { docker exec -it jira bash; }
+function dex-postgres15 { docker exec -it jira-postgresql bash; }
+function dex-postgres17 { docker exec -it gitlab-postgresql bash; }
+function dex-redis { docker exec -it redis bash; }
+function dex-middleweb-backend { docker exec -it middleweb-backend bash; }
+function dex-middleweb-frontend { docker exec -it middleweb-frontend bash; }
 
 # Container logs shortcuts
-function dlogs_nginx { docker logs nginx -f; }
-function dlogs_gitlab { docker logs gitlab -f; }
-function dlogs_jenkins { docker logs jenkins -f; }
-function dlogs_nexus { docker logs nexus -f; }
-function dlogs_sqlserver { docker logs sqlserver2022 -f; }
-function dlogs_jira { docker logs jira -f; }
-function dlogs_postgres15 { docker logs postgresql -f; }
-function dlogs_postgres17 { docker logs postgresql -f; }
-function dlogs_redis { docker logs redis -f; }
-function dlogs_middleweb-backend { docker logs middleweb-backend -f; }
-function dlogs_middleweb-frontend { docker logs middleweb-frontend -f; }
+function dlogs-nginx { docker logs nginx -f; }
+function dlogs-gitlab { docker logs gitlab -f; }
+function dlogs-jenkins { docker logs jenkins -f; }
+function dlogs-nexus { docker logs nexus -f; }
+function dlogs-sqlserver { docker logs sqlserver2022 -f; }
+function dlogs-jira { docker logs jira -f; }
+function dlogs-postgres15 { docker logs postgresql -f; }
+function dlogs-postgres17 { docker logs postgresql -f; }
+function dlogs-redis { docker logs redis -f; }
+function dlogs-middleweb-backend { docker logs middleweb-backend -f; }
+function dlogs-middleweb-frontend { docker logs middleweb-frontend -f; }
 
 # Environment variables
-export p_confd=/opt/docker/nginx/conf.d/
-export p_nginx=/opt/docker/nginx/
-export p_nexus=/opt/docker/nexus/
-export p_jenkins=/opt/docker/jenkins/
-export p_gitlab=/opt/docker/gitlab/
-export p_jira=/opt/docker/jira/
-export p_sqlserver=/opt/docker/sqlserver/
-export p_middleweb_backend=/home/jenkins/jobs/compose/middleweb-backend.yml
-export p_middleweb_frontend=/home/jenkins/jobs/compose/middleweb-frontend.yml
+export p-confd=/opt/docker/nginx/conf.d/
+export p-nginx=/opt/docker/nginx/
+export p-nexus=/opt/docker/nexus/
+export p-jenkins=/opt/docker/jenkins/
+export p-gitlab=/opt/docker/gitlab/
+export p-jira=/opt/docker/jira/
+export p-sqlserver=/opt/docker/sqlserver/
+export p-middleweb-backend=/home/jenkins/jobs/compose/middleweb-backend.yml
+export p-middleweb-frontend=/home/jenkins/jobs/compose/middleweb-frontend.yml
 
 # Directory shortcuts
-function cd_confd { cd /opt/docker/nginx/conf.d/; }
-function cd_nginx { cd /opt/docker/nginx/; }
-function cd_redis { cd /opt/docker/redis/; }
-function cd_postgresql { cd /opt/docker/postgresql/; }
-function cd_gitlab { cd /opt/docker/gitlab/; }
-function cd_nexus { cd /opt/docker/nexus/; }
-function cd_jenkins { cd /opt/docker/jenkins/; }
-function cd_sqlserver { cd /opt/docker/sqlserver/; }
-function cd_jobs { cd /home/jenkins/jobs/; }
-function cd_jira { cd /opt/docker/jira/; }
-function cd_middleweb-backend { cd /home/jenkins/jobs/middleweb-backend/; }
-function cd_middleweb-frontend { cd /home/jenkins/jobs/middleweb-frontend/; }
+function cd-confd { cd /opt/docker/nginx/conf.d/; }
+function cd-nginx { cd /opt/docker/nginx/; }
+function cd-redis { cd /opt/docker/redis/; }
+function cd-postgresql { cd /opt/docker/postgresql/; }
+function cd-gitlab { cd /opt/docker/gitlab/; }
+function cd-nexus { cd /opt/docker/nexus/; }
+function cd-jenkins { cd /opt/docker/jenkins/; }
+function cd-sqlserver { cd /opt/docker/sqlserver/; }
+function cd-jobs { cd /home/jenkins/jobs/; }
+function cd-jira { cd /opt/docker/jira/; }
+function cd-middleweb-backend { cd /home/jenkins/jobs/middleweb-backend/; }
+function cd-middleweb-frontend { cd /home/jenkins/jobs/middleweb-frontend/; }
 
 # Docker compose shortcuts
-function dc_build { docker compose build; }
-function dc_up { docker compose up -d; }
-function dc_down { docker compose down; }
-function dc_restart { docker compose restart; }
-function dc_logs { docker compose logs -f; }
-function dc_ps { docker compose ps; }
+function dc-build { docker compose build; }
+function dc-up { docker compose up -d; }
+function dc-down { docker compose down; }
+function dc-restart { docker compose restart; }
+function dc-logs { docker compose logs -f; }
+function dc-ps { docker compose ps; }
 
 EOF
 
-tee /etc/scc//doco_all_down.sh > /dev/null << 'EOF'
+tee /etc/scc//doco-all-down.sh > /dev/null << 'EOF'
 #!/bin/bash
 
 docker compose --env-file /opt/docker/gitlab/.env -f /opt/docker/gitlab/gitlab-compose.yml down
@@ -271,7 +271,7 @@ docker compose -f /home/jenkins/jobs/compose/middleweb-backend.yml down
 docker-compose -f /opt/docker/nginx/nginx-docker-compose.yml down
 EOF
 
-tee /etc/scc//doco_all_up.sh > /dev/null << 'EOF'
+tee /etc/scc//doco-all-up.sh > /dev/null << 'EOF'
 #!/bin/bash
 
 docker compose --env-file /opt/docker/gitlab/.env -f /opt/docker/gitlab/postgresql-compose.yml up --force-recreate -d
@@ -288,7 +288,7 @@ docker-compose -f /opt/docker/nginx/nginx-docker-compose.yml up --force-recreate
 EOF
 
 
-tee /etc/scc//doco_nginx_up.sh > /dev/null << 'EOF'
+tee /etc/scc//doco-nginx-up.sh > /dev/null << 'EOF'
 #!/bin/bash
 
 docker-compose -f /opt/docker/nginx/nginx-docker-compose.yml up --force-recreate -d

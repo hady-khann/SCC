@@ -5,7 +5,7 @@ echo "preperation"
 
 # Define paths
 PKGDIR=/etc/scc
-WORKDIR=/tmp/scc_install
+WORKDIR=/tmp/scc-install
 
 # Ensure clean temp directory
 rm -rf "$WORKDIR"
@@ -19,7 +19,7 @@ git clone https://github.com/hady-khann/SCC.git "$WORKDIR"
 echo "checking system"
 
 # Always overwrite /etc/scc/.sources
-cp "$WORKDIR/_sources" "$PKGDIR/.sources"
+cp "$WORKDIR/-sources" "$PKGDIR/.sources"
 chmod 644 "$PKGDIR/.sources"
 
 # Ensure /etc/bash.bashrc sources /etc/scc/.sources only once
@@ -36,11 +36,11 @@ fi
 
 echo "install....."
 # Run modular bashrc scripts (these modify files in /etc/)
-bash "$WORKDIR/bashrc/dkr_bashrc"
-bash "$WORKDIR/bashrc/doco_bashrc"
-bash "$WORKDIR/bashrc/git_bashrc"
-bash "$WORKDIR/bashrc/tmx_bashrc"
-bash "$WORKDIR/bashrc/k8s_bashrc"
+bash "$WORKDIR/bashrc/dkr-bashrc"
+bash "$WORKDIR/bashrc/doco-bashrc"
+bash "$WORKDIR/bashrc/git-bashrc"
+bash "$WORKDIR/bashrc/tmx-bashrc"
+bash "$WORKDIR/bashrc/k8s-bashrc"
 
 echo "reload bash ....."
 
