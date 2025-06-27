@@ -54,3 +54,9 @@ echo "cleanup"
 
 # Ensure clean temp directory
 rm -rf "$WORKDIR"
+
+
+
+echo -e "\n\033[1;32mInstallation complete!\033[0m"
+echo "To apply changes, run:"
+echo "  source /etc/bash.bashrc && source ~/.bashrc"
