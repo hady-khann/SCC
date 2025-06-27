@@ -53,5 +53,4 @@ source ~/.bashrc
 echo "cleanup"
 
 # Ensure clean temp directory
-rm -rf "$PKGDIR"
 rm -rf "$WORKDIR"
