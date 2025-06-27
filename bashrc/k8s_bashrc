@@ -116,28 +116,28 @@ k_deploy() {
 
 
 # Resources
-k_p() { kubectl get pods "$@"; }
-k_pw() { kubectl get pods -w; }
-k_pwide() { kubectl get pods -o wide; }
-k_pall() { kubectl get pods --all-namespaces; }
-k_no() { kubectl get nodes; }
-k_nowide() { kubectl get nodes -o wide; }
-k_dep() { kubectl get deployments; }
-k_rs() { kubectl get replicasets; }
-k_svc() { kubectl get services; }
-k_ing() { kubectl get ingress; }
-k_cm() { kubectl get configmaps; }
-k_sec() { kubectl get secrets; }
-k_pv() { kubectl get pv; }
-k_pvc() { kubectl get pvc; }
-k_sc() { kubectl get sc; }
-k_sa() { kubectl get serviceaccounts; }
-k_crd() { kubectl get crd; }
-k_j() { kubectl get jobs; }
-k_cj() { kubectl get cronjobs; }
+k_pods() { kubectl get pods "$@"; }
+k_podsw() { kubectl get pods -w; }
+k_pods_wide() { kubectl get pods -o wide; }
+k_pods_all() { kubectl get pods --all-namespaces; }
+k_nods() { kubectl get nodes; }
+k_nods_wide() { kubectl get nodes -o wide; }
+k_deps() { kubectl get deployments; }
+k_reps() { kubectl get replicasets; }
+k_servs() { kubectl get services; }
+k_ings() { kubectl get ingress; }
+k_maps() { kubectl get configmaps; }
+k_secs() { kubectl get secrets; }
+k_pvs() { kubectl get pv; }
+k_pvcs() { kubectl get pvc; }
+k_scs() { kubectl get sc; }
+k_accs() { kubectl get serviceaccounts; }
+k_crds() { kubectl get crd; }
+k_jobs() { kubectl get jobs; }
+k_crons() { kubectl get cronjobs; }
 
 # Logs
-k_lg() { kubectl logs "$@"; }
+k_lgs() { kubectl logs "$@"; }
 k_lgf() { kubectl logs -f "$@"; }
 k_lgp() { kubectl logs -p "$@"; }
 k_lga() { kubectl logs --all-containers "$@"; }
