@@ -138,36 +138,6 @@ dc-redis-logs() {
   docker logs redis -f
 }
 
-# middleweb-backend functions
-dc-middleweb-backend-reset() {
-  docker compose -f /home/jenkins/jobs/compose/middleweb-backend.yml down
-  docker compose -f /home/jenkins/jobs/compose/middleweb-backend.yml up --force-recreate -d
-}
-dc-middleweb-backend-down() {
-  docker compose -f /home/jenkins/jobs/compose/middleweb-backend.yml down
-}
-dc-middleweb-backend-up() {
-  docker compose -f /home/jenkins/jobs/compose/middleweb-backend.yml up --force-recreate -d
-}
-dc-middleweb-backend-logs() {
-  docker logs middleweb-backend -f
-}
-
-# middleweb-frontend functions
-dc-middleweb-frontend-reset() {
-  docker compose -f /home/jenkins/jobs/compose/middleweb-frontend.yml down
-  docker compose -f /home/jenkins/jobs/compose/middleweb-frontend.yml up --force-recreate -d
-}
-dc-middleweb-frontend-down() {
-  docker compose -f /home/jenkins/jobs/compose/middleweb-frontend.yml down
-}
-dc-middleweb-frontend-up() {
-  docker compose -f /home/jenkins/jobs/compose/middleweb-frontend.yml up --force-recreate -d
-}
-dc-middleweb-frontend-logs() {
-  docker logs middleweb-frontend -f
-}
-
 # ALL functions
 dc-all-down() {
   bash /etc/scc//dc-all-down.sh
@@ -204,8 +174,6 @@ function dex-jira { docker exec -it jira bash; }
 function dex-postgres15 { docker exec -it jira-postgresql bash; }
 function dex-postgres17 { docker exec -it gitlab-postgresql bash; }
 function dex-redis { docker exec -it redis bash; }
-function dex-middleweb-backend { docker exec -it middleweb-backend bash; }
-function dex-middleweb-frontend { docker exec -it middleweb-frontend bash; }
 
 # Container logs shortcuts
 function dlogs-nginx { docker logs nginx -f; }
@@ -217,8 +185,6 @@ function dlogs-jira { docker logs jira -f; }
 function dlogs-postgres15 { docker logs postgresql -f; }
 function dlogs-postgres17 { docker logs postgresql -f; }
 function dlogs-redis { docker logs redis -f; }
-function dlogs-middleweb-backend { docker logs middleweb-backend -f; }
-function dlogs-middleweb-frontend { docker logs middleweb-frontend -f; }
 
 # Environment variables
 export p-confd=/opt/docker/nginx/conf.d/
@@ -228,8 +194,6 @@ export p-jenkins=/opt/docker/jenkins/
 export p-gitlab=/opt/docker/gitlab/
 export p-jira=/opt/docker/jira/
 export p-sqlserver=/opt/docker/sqlserver/
-export p-middleweb-backend=/home/jenkins/jobs/compose/middleweb-backend.yml
-export p-middleweb-frontend=/home/jenkins/jobs/compose/middleweb-frontend.yml
 
 # Directory shortcuts
 function cd-confd { cd /opt/docker/nginx/conf.d/; }
@@ -242,8 +206,6 @@ function cd-jenkins { cd /opt/docker/jenkins/; }
 function cd-sqlserver { cd /opt/docker/sqlserver/; }
 function cd-jobs { cd /home/jenkins/jobs/; }
 function cd-jira { cd /opt/docker/jira/; }
-function cd-middleweb-backend { cd /home/jenkins/jobs/middleweb-backend/; }
-function cd-middleweb-frontend { cd /home/jenkins/jobs/middleweb-frontend/; }
 
 # Docker compose shortcuts
 function dc-build { docker compose build; }
@@ -266,8 +228,6 @@ docker-compose -f /opt/docker/nexus/nexus-docker-compose.yml down
 docker-compose -f /opt/docker/sqlserver/sqlserver-docker-compose.yml down
 docker-compose -f /opt/docker/jenkins/jenkins-docker-compose.yml down
 
-docker compose -f /home/jenkins/jobs/compose/middleweb-backend.yml down
-
 docker-compose -f /opt/docker/nginx/nginx-docker-compose.yml down
 EOF
 
@@ -277,8 +237,6 @@ tee /etc/scc//dc-all-up.sh > /dev/null << 'EOF'
 docker compose --env-file /opt/docker/gitlab/.env -f /opt/docker/gitlab/postgresql-compose.yml up --force-recreate -d
 docker compose --env-file /opt/docker/gitlab/.env -f /opt/docker/gitlab/redis-compose.yml up --force-recreate -d
 docker compose --env-file /opt/docker/gitlab/.env -f /opt/docker/gitlab/gitlab-compose.yml up --force-recreate -d
-
-docker compose -f /home/jenkins/jobs/compose/middleweb-backend.yml up --force-recreate -d
 
 docker-compose -f /opt/docker/nexus/nexus-docker-compose.yml up --force-recreate -d
 docker-compose -f /opt/docker/sqlserver/sqlserver-docker-compose.yml up --force-recreate -d
