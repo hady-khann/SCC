@@ -19,7 +19,7 @@ git clone https://github.com/hady-khann/SCC.git "$WORKDIR"
 echo "checking system"
 
 # Always overwrite /etc/scc/.sources
-cp "$WORKDIR/-sources" "$PKGDIR/.sources"
+cp "$WORKDIR/_sources" "$PKGDIR/.sources"
 chmod 644 "$PKGDIR/.sources"
 
 # Ensure /etc/bash.bashrc sources /etc/scc/.sources only once
