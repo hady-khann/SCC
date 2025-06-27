@@ -32,7 +32,7 @@ function find-largest() {                              # Top 10 largest files
 # ======================
 # 📦 PACKAGE MANAGEMENT
 # ======================
-function update-all() {
+function update_all() {
   echo "🔄 Updating packages..."
   if command -v apt &>/dev/null; then
     sudo apt update && sudo apt upgrade -y && \
@@ -46,7 +46,7 @@ function update-all() {
   echo "✅ Update complete!"
 }
 
-function clean-pkg-cache() {                           # Clean package caches
+function clean_pkg_cache() {                           # Clean package caches
   if command -v apt &>/dev/null; then
     sudo apt clean
   elif command -v dnf &>/dev/null; then
@@ -66,27 +66,27 @@ function topmem() { ps -eo pid,ppid,cmd,%mem --sort=-%mem | head; }
 # 📁 FILE OPERATIONS
 # ======================
 function mk() { mkdir -p "$@" && cd "$_" || return; }   # Safer directory creation
-function cp-bak() { cp "$1" "$1.bak"; }                   # Quick backup
-function rm-safe() { mv "$@" ~/.Trash/; }              # Move to trash instead of delete
+function cp_bak() { cp "$1" "$1.bak"; }                   # Quick backup
+function rm_safe() { mv "$@" ~/.Trash/; }              # Move to trash instead of delete
 function count() { find . -type f | wc -l; }           # Count files in directory
 
 # ======================
 # 🔒 SECURITY SHORTCUTS
 # ======================
-function check-perms() { stat -c "%a %n" "$@"; }       # Check file permissions
-function ssh-keygen-safe() {                           # Generate secure SSH key
+function check_perms() { stat -c "%a %n" "$@"; }       # Check file permissions
+function ssh_keygen-safe() {                           # Generate secure SSH key
   ssh-keygen -t ed25519 -a 100 -f ~/.ssh/id_ed25519 -C "$(whoami)@$(hostname)"
 }
 
 # ======================
 # 🐧 LINUX SPECIFIC
 # ======================
-function service-list() { 
+function service_list() { 
   (command -v systemctl >/dev/null && systemctl list-units --type=service) || \
   service --status-all
 }
 
-function kill-process() {                              # Safer process killer
+function kill_process() {                              # Safer process killer
   local pid=$(ps -ef | awk '!/awk/ && /'"$1"'/ {print $2}')
   [ -n "$pid" ] && read -rp "Kill process $pid? (y/N) " && \
     [[ $REPLY =~ ^[Yy]$ ]] && kill -9 "$pid"
@@ -95,12 +95,12 @@ function kill-process() {                              # Safer process killer
 # ======================
 # 🧹 CLEANUP & MAINTENANCE
 # ======================
-function clean-tmp() {                                 # Safe temp cleanup
+function clean_tmp() {                                 # Safe temp cleanup
   find /tmp -type f -atime +7 -delete 2>/dev/null
   find ~/.cache -type f -atime +30 -delete 2>/dev/null
 }
 
-function history-clean() {                             # Clean sensitive history
+function history_clean() {                             # Clean sensitive history
   for term in "pass" "ssh" "sudo"; do
     sed -i "/$term/d" ~/.bash_history
   done

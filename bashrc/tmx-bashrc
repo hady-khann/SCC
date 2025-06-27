@@ -1,6 +1,6 @@
 #!/bin/bash
 
-tee /etc/scc/.tmx-bashrc > /dev/null << 'EOF'
+tee /etc/scc/.tmx_bashrc > /dev/null << 'EOF'
 #!/bin/bash
 
 function tmx { tmux attach -t $1 || tmux new -s $1; }   # Attach or create session

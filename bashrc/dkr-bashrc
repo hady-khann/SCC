@@ -1,6 +1,6 @@
 #!/bin/bash
 
-tee /etc/scc/.dkr-bashrc > /dev/null << 'EOF'
+tee /etc/scc/.dkr_bashrc > /dev/null << 'EOF'
 #!/bin/bash
 
 # Docker monitor shortcuts
@@ -17,20 +17,7 @@ function dnetworks { docker network ls; }
 function dclean { docker system prune -af; }
 function dimages { docker image ls; }
 
-function dbuild { docker build .; }
-function dc-logs { docker logs "$1" -f; }
-
-# Docker compose shortcuts
-function dc-up { docker compose up -f "$1" -d; }
-function dc-down { docker compose -f "$1" down; }
-
-function dc-restart() { 
-    docker compose -f "$1" down; 
-    docker compose -f "$1" up; -d 
-}
-function dc-reset() { 
-    docker compose -f "$1" down; 
-    docker compose -f "$1" up --force-recreate -d; 
-}
+function dbild { docker build .; }
+function dlgs { docker logs "$1" -f; }
 
 EOF
