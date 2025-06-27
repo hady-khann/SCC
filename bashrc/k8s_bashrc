@@ -107,6 +107,14 @@ k_del() { kubectl delete "$@"; }
 k_e() { kubectl edit "$@"; }
 k_ex() { kubectl explain "$@"; }
 
+k_deploy() {
+  local name="$1"
+  local image="$2"
+  shift 2
+  kubectl create deployment "$name" --image="$image" "$@"
+}
+
+
 # Resources
 k_p() { kubectl get pods "$@"; }
 k_pw() { kubectl get pods -w; }
