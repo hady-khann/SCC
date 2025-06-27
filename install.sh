@@ -8,13 +8,14 @@ PKGDIR=/etc/scc
 WORKDIR=/tmp/scc-install
 
 # Ensure clean temp directory
+rm -rf "$PKGDIR"
 rm -rf "$WORKDIR"
 mkdir -p "$WORKDIR" "$PKGDIR"
 
 echo "cloning"
 
 # Clone repo to temp
-git clone https://github.com/hady-khann/SCC.git "$WORKDIR"
+git clone --depth=1 https://github.com/hady-khann/SCC.git "$WORKDIR"
 
 echo "checking system"
 
@@ -52,4 +53,5 @@ source ~/.bashrc
 echo "cleanup"
 
 # Ensure clean temp directory
+rm -rf "$PKGDIR"
 rm -rf "$WORKDIR"
