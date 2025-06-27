@@ -24,3 +24,8 @@ fi
 if [ -f /etc/scc/.k8s-bashrc ]; then
   source /etc/scc/.k8s-bashrc
 fi
+
+# basic system functions
+if [ -f /etc/scc/.sys-bashrc ]; then
+  source /etc/scc/.sys-bashrc
+fi

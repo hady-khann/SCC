@@ -36,11 +36,12 @@ fi
 
 echo "install....."
 # Run modular bashrc scripts (these modify files in /etc/)
-bash "$WORKDIR/bashrc/dkr-bashrc"
-bash "$WORKDIR/bashrc/dc-bashrc"
-bash "$WORKDIR/bashrc/git-bashrc"
-bash "$WORKDIR/bashrc/tmx-bashrc"
-bash "$WORKDIR/bashrc/k8s-bashrc"
+bash "$WORKDIR/bashrc/dkr_bashrc"
+bash "$WORKDIR/bashrc/dc_bashrc"
+bash "$WORKDIR/bashrc/git_bashrc"
+bash "$WORKDIR/bashrc/tmx_bashrc"
+bash "$WORKDIR/bashrc/k8s_bashrc"
+bash "$WORKDIR/bashrc/sys_bashrc"
 
 echo "reload bash ....."
 
