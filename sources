@@ -1,31 +1,31 @@
 #!/bin/bash
 
 # docker
-if [ -f /etc/scc/.dkr-bashrc ]; then
-  source /etc/scc/.dkr-bashrc
+if [ -f /etc/scc/.dkr_bashrc ]; then
+  source /etc/scc/.dkr_bashrc
 fi
 
 # docker-compose
-if [ -f /etc/scc/.dc-bashrc ]; then
-  source /etc/scc/.dc-bashrc
+if [ -f /etc/scc/.dc_bashrc ]; then
+  source /etc/scc/.dc_bashrc
 fi
 
 # git
-if [ -f /etc/scc/.git-bashrc ]; then
-  source /etc/scc/.git-bashrc
+if [ -f /etc/scc/.git_bashrc ]; then
+  source /etc/scc/.git_bashrc
 fi
 
 # tmux
-if [ -f /etc/scc/.tmx-bashrc ]; then
-  source /etc/scc/.tmx-bashrc
+if [ -f /etc/scc/.tmx_bashrc ]; then
+  source /etc/scc/.tmx_bashrc
 fi
 
 # kubernetes and minikube
-if [ -f /etc/scc/.k8s-bashrc ]; then
-  source /etc/scc/.k8s-bashrc
+if [ -f /etc/scc/.k8s_bashrc ]; then
+  source /etc/scc/.k8s_bashrc
 fi
 
 # basic system functions
-if [ -f /etc/scc/.sys-bashrc ]; then
-  source /etc/scc/.sys-bashrc
+if [ -f /etc/scc/.sys_bashrc ]; then
+  source /etc/scc/.sys_bashrc
 fi
