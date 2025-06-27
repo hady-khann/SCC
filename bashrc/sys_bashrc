@@ -1,0 +1,119 @@
+#!/bin/bash
+
+tee /etc/scc/.sys_bashrc > /dev/null << 'EOF'
+
+#!/bin/bash
+
+# ======================
+# 🌐 NETWORK UTILITIES
+# ======================
+function myip() { 
+  curl -s ifconfig.me/all.json | jq -r '.ip_addr' 2>/dev/null || \
+  curl -s icanhazip.com
+}
+
+function ports() {
+  (command -v ss >/dev/null && ss -tulnp) || \
+  netstat -tulnp 2>/dev/null | grep -v "Active Internet"
+}
+
+function pingg() { ping 8.8.8.8; }                     # Quick connectivity test
+function speedtest() { curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python -; }
+
+# ======================
+# 💽 DISK & FILESYSTEM
+# ======================
+function dfh() { df -hT -x tmpfs -x devtmpfs; }        # Human-readable disk space
+function duh() { du -sh * | sort -h; }                 # Sort directory sizes
+function find-largest() {                              # Top 10 largest files
+  find . -type f -exec du -h {} + 2>/dev/null | sort -rh | head -n 10
+}
+
+# ======================
+# 📦 PACKAGE MANAGEMENT
+# ======================
+function update-all() {
+  echo "🔄 Updating packages..."
+  if command -v apt &>/dev/null; then
+    sudo apt update && sudo apt upgrade -y && \
+    sudo apt autoremove -y
+  elif command -v dnf &>/dev/null; then
+    sudo dnf upgrade -y && \
+    sudo dnf autoremove -y
+  elif command -v pacman &>/dev/null; then
+    sudo pacman -Syu --noconfirm
+  fi
+  echo "✅ Update complete!"
+}
+
+function clean-pkg-cache() {                           # Clean package caches
+  if command -v apt &>/dev/null; then
+    sudo apt clean
+  elif command -v dnf &>/dev/null; then
+    sudo dnf clean all
+  fi
+}
+
+# ======================
+# 🛠️ SYSTEM MONITORING
+# ======================
+function cpuinfo() { lscpu || sysctl -n machdep.cpu; }  # Cross-platform CPU info
+function meminfo() { free -h; }
+function topcpu() { ps -eo pid,ppid,cmd,%cpu --sort=-%cpu | head; }
+function topmem() { ps -eo pid,ppid,cmd,%mem --sort=-%mem | head; }
+
+# ======================
+# 📁 FILE OPERATIONS
+# ======================
+function mk() { mkdir -p "$@" && cd "$_" || return; }   # Safer directory creation
+function cp-bak() { cp "$1" "$1.bak"; }                   # Quick backup
+function rm-safe() { mv "$@" ~/.Trash/; }              # Move to trash instead of delete
+function count() { find . -type f | wc -l; }           # Count files in directory
+
+# ======================
+# 🔒 SECURITY SHORTCUTS
+# ======================
+function check-perms() { stat -c "%a %n" "$@"; }       # Check file permissions
+function ssh-keygen-safe() {                           # Generate secure SSH key
+  ssh-keygen -t ed25519 -a 100 -f ~/.ssh/id_ed25519 -C "$(whoami)@$(hostname)"
+}
+
+# ======================
+# 🐧 LINUX SPECIFIC
+# ======================
+function service-list() { 
+  (command -v systemctl >/dev/null && systemctl list-units --type=service) || \
+  service --status-all
+}
+
+function kill-process() {                              # Safer process killer
+  local pid=$(ps -ef | awk '!/awk/ && /'"$1"'/ {print $2}')
+  [ -n "$pid" ] && read -rp "Kill process $pid? (y/N) " && \
+    [[ $REPLY =~ ^[Yy]$ ]] && kill -9 "$pid"
+}
+
+# ======================
+# 🧹 CLEANUP & MAINTENANCE
+# ======================
+function clean-tmp() {                                 # Safe temp cleanup
+  find /tmp -type f -atime +7 -delete 2>/dev/null
+  find ~/.cache -type f -atime +30 -delete 2>/dev/null
+}
+
+function history-clean() {                             # Clean sensitive history
+  for term in "pass" "ssh" "sudo"; do
+    sed -i "/$term/d" ~/.bash_history
+  done
+  history -c
+}
+
+# ======================
+# 🚀 PRODUCTIVITY BOOSTERS
+# ======================
+function cheat() { curl -s "cheat.sh/$(echo "$@" | tr ' ' '+')"; } # CLI cheatsheets
+function weather() { curl -s "wttr.in/${1:-}?format=3"; }         # Weather report
+function qr() { echo "$@" | curl -s -F-=\<- qrenco.de; }          # Generate QR code
+
+
+EOF
+
