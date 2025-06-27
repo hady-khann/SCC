@@ -2,30 +2,36 @@
 
 # docker
 if [ -f /etc/scc/.dkr_bashrc ]; then
+  echo "loading .dkr_bashrc"
   source /etc/scc/.dkr_bashrc
 fi
 
 # docker-compose
 if [ -f /etc/scc/.dc_bashrc ]; then
+  echo loading .dc_bashrc
   source /etc/scc/.dc_bashrc
 fi
 
 # git
 if [ -f /etc/scc/.git_bashrc ]; then
+  echo loading .git_bashrc
   source /etc/scc/.git_bashrc
 fi
 
 # tmux
 if [ -f /etc/scc/.tmx_bashrc ]; then
+  echo loading .tmx_bashrc
   source /etc/scc/.tmx_bashrc
 fi
 
 # kubernetes and minikube
 if [ -f /etc/scc/.k8s_bashrc ]; then
+  echo loading .k8s_bashrc
   source /etc/scc/.k8s_bashrc
 fi
 
 # basic system functions
 if [ -f /etc/scc/.sys_bashrc ]; then
+  echo loading .sys_bashrc
   source /etc/scc/.sys_bashrc
 fi
