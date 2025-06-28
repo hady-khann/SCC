@@ -122,7 +122,7 @@ k_pods_wide() { kubectl get pods -o wide; }
 k_pods_all() { kubectl get pods --all-namespaces; }
 k_nods() { kubectl get nodes; }
 k_nods_wide() { kubectl get nodes -o wide; }
-k_deps() { kubectl get deployments; }
+k_depls() { kubectl get deployments; }
 k_reps() { kubectl get replicasets; }
 k_servs() { kubectl get services; }
 k_ings() { kubectl get ingress; }
