@@ -100,11 +100,11 @@ k_ns_cur() { kubectl config view --minify --output 'jsonpath={..namespace}'; ech
 
 # CRUD
 k_g() { kubectl get "$@"; }
-k_d() { kubectl describe "$@"; }
+k_dsc() { kubectl describe "$@"; }
 k_c() { kubectl create "$@"; }
 k_a() { kubectl apply "$@"; }
 k_del() { kubectl delete "$@"; }
-k_e() { kubectl edit "$@"; }
+k_ed() { kubectl edit "$@"; }
 k_ex() { kubectl explain "$@"; }
 
 k_deploy() {
