@@ -4,10 +4,10 @@ tee /etc/scc/.tmx_bashrc > /dev/null << 'EOF'
 #!/bin/bash
 
 function tmx { tmux attach -t $1 || tmux new -s $1; }   # Attach or create session
-function tmx-new { tmux new -s $1; }                    # Create new named session
-function tmx-kill { tmux kill-session -t $1; }          # Kill specific session
-function tmx-ls { tmux list-sessions; }                 # List all sessions
-function tmx-last {                                     # Restore last session
+function tmx_new { tmux new -s $1; }                    # Create new named session
+function tmx_kill { tmux kill-session -t $1; }          # Kill specific session
+function tmx_ls { tmux list-sessions; }                 # List all sessions
+function tmx_last {                                     # Restore last session
     tmux attach || tmux new
 }
 
