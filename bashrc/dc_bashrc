@@ -27,7 +27,7 @@ dc_nginx_down() {
 dc_nginx_up() {
   docker-compose -f /opt/docker/nginx/nginx-docker-compose.yml up --force-recreate -d
 }
-dc_nginx-logs() {
+dc_nginx_logs() {
   docker logs nginx -f
 }
 
@@ -42,7 +42,7 @@ dc_sqlserver_down() {
 dc_sqlserver_up() {
   docker-compose -f /opt/docker/sqlserver/sqlserver-docker-compose.yml up --force-recreate -d
 }
-dc_sqlserver-logs() {
+dc_sqlserver_logs() {
   docker logs sqlserver2022 -f
 }
 
@@ -57,7 +57,7 @@ dc_nexus_down() {
 dc_nexus_up() {
   docker-compose -f /opt/docker/nexus/nexus-docker-compose.yml up --force-recreate -d
 }
-dc_nexus-logs() {
+dc_nexus_logs() {
   docker logs nexus -f
 }
 
@@ -72,7 +72,7 @@ dc_jenkins_down() {
 dc_jenkins_up() {
   docker-compose -f /opt/docker/jenkins/jenkins-docker-compose.yml up --force-recreate -d
 }
-dc_jenkins-logs() {
+dc_jenkins_logs() {
   docker logs jenkins -f
 }
 
@@ -87,7 +87,7 @@ dc_gitlab_down() {
 dc_gitlab_up() {
   docker compose --env-file /opt/docker/gitlab/.env -f /opt/docker/gitlab/gitlab-compose.yml up --force-recreate -d
 }
-dc_gitlab-logs() {
+dc_gitlab_logs() {
   docker logs gitlab -f
 }
 
@@ -102,7 +102,7 @@ dc_jira_down() {
 dc_jira_up() {
   docker compose --env-file /opt/docker/jira/.env -f /opt/docker/jira/jira-compose.yml up --force-recreate -d
 }
-dc_jira-logs() {
+dc_jira_logs() {
   docker logs jira -f
 }
 
@@ -117,7 +117,7 @@ dc_postgres17_down() {
 dc_postgres17_up() {
   docker compose --env-file /opt/docker/gitlab/.env -f /opt/docker/gitlab/postgresql-compose.yml up --force-recreate -d
 }
-dc_postgres17-logs() {
+dc_postgres17_logs() {
   docker logs gitlab-postgresql -f
 }
 
@@ -132,7 +132,7 @@ dc_postgres15_down() {
 dc_postgres15_up() {
   docker compose --env-file /opt/docker/jira/.env -f /opt/docker/jira/postgresql-compose.yml up --force-recreate -d
 }
-dc_postgres15-logs() {
+dc_postgres15_logs() {
   docker logs jira-postgresql -f
 }
 
@@ -147,7 +147,7 @@ dc_redis_down() {
 dc_redis_up() {
   docker compose --env-file /opt/docker/gitlab/.env -f /opt/docker/gitlab/redis-compose.yml up --force-recreate -d
 }
-dc_redis-logs() {
+dc_redis_logs() {
   docker logs redis -f
 }
 
