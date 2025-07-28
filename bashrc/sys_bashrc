@@ -20,6 +20,18 @@ function ports() {
 function pingg() { ping 8.8.8.8; }                     # Quick connectivity test
 function speedtest() { curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python -; }
 
+function digg() {
+  echo "From Google DNS (8.8.8.8):"
+  dig +short "$1" @8.8.8.8
+  echo "From Cloudflare DNS (1.1.1.1):"
+  dig +short "$1" @1.1.1.1
+}
+
+function myhost() {
+  command host "$1"
+}
+
+
 # ======================
 # 💽 DISK & FILESYSTEM
 # ======================

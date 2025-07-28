@@ -1,0 +1,26 @@
+#!/bin/bash
+
+sudo mkdir -p /etc/scc
+
+sudo tee /etc/scc/.scc_bashrc > /dev/null << 'EOF'
+#!/bin/bash
+
+# Function to update SCC from GitHub
+function scc_update() {
+
+  # Run the install script directly from GitHub
+  bash <(curl -Ls https://raw.githubusercontent.com/hady-khann/SCC/main/install.sh)
+
+  # Reload both global and user-specific bash configurations
+  source /etc/bash.bashrc 2>/dev/null || echo "Global bashrc not found"
+  source ~/.bashrc 2>/dev/null || echo "User bashrc not found"
+
+  # Show success message
+  echo -e "\n\033[1;32mInstallation complete!\033[0m"
+  echo "To apply changes, run:"
+  echo "  source /etc/bash.bashrc && source ~/.bashrc"
+
+}
+
+EOF
+
