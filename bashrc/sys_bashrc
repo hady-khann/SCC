@@ -12,6 +12,11 @@ function myip() {
   curl -s icanhazip.com
 }
 
+function rebuild-resolved() { 
+   systemctl restart systemd-resolved
+   ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
+}
+
 function ports() {
   (command -v ss >/dev/null && ss -tulnp) || \
   netstat -tulnp 2>/dev/null | grep -v "Active Internet"
