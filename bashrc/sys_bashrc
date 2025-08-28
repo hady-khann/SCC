@@ -17,6 +17,16 @@ function rebuild-resolved() {
    ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
 }
 
+function stop-resolved() { 
+   systemctl stop systemd-resolved
+   systemctl disable systemd-resolved
+}
+
+function staqrt-resolved() { 
+   systemctl start systemd-resolved
+   systemctl enable systemd-resolved
+}
+
 function ports() {
   (command -v ss >/dev/null && ss -tulnp) || \
   netstat -tulnp 2>/dev/null | grep -v "Active Internet"
