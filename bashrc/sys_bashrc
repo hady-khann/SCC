@@ -22,7 +22,7 @@ function stop-resolved() {
    systemctl disable systemd-resolved
 }
 
-function staqrt-resolved() { 
+function start-resolved() { 
    systemctl start systemd-resolved
    systemctl enable systemd-resolved
 }
