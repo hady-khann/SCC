@@ -27,6 +27,11 @@ function start-resolved() {
    systemctl enable systemd-resolved
 }
 
+function restart-resolved() { 
+   systemctl restart systemd-resolved
+   systemctl enable systemd-resolved
+}
+
 function ports() {
   (command -v ss >/dev/null && ss -tulnp) || \
   netstat -tulnp 2>/dev/null | grep -v "Active Internet"
