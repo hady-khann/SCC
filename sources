@@ -36,8 +36,3 @@ fi
 if [ -f /etc/scc/.sys_bashrc ]; then
   source /etc/scc/.scc_bashrc
 fi
-
-# scc system functions
-if [ -f /etc/scc/.sys_bashrc ]; then
-  source /etc/scc/.kuber_bashrc
-fi

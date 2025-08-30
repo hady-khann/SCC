@@ -44,7 +44,6 @@ bash "$WORKDIR/bashrc/tmx_bashrc"
 bash "$WORKDIR/bashrc/k8s_bashrc"
 bash "$WORKDIR/bashrc/sys_bashrc"
 bash "$WORKDIR/bashrc/scc_bashrc"
-bash "$WORKDIR/bashrc/kuber_bashrc"
 
 echo "reload bash ....."
 
