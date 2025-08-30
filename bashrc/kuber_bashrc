@@ -1,0 +1,61 @@
+#!/bin/bash
+
+tee /etc/scc/.kuber_bashrc > /dev/null << 'EOF'
+#!/bin/bash
+
+_kubelet_custom_complete() {
+    COMPREPLY=($(compgen -W "
+        --version --help --config --kubeconfig --root-dir --pod-manifest-path
+        --register-node --node-ip --node-labels --hostname-override
+        --cgroup-driver --fail-swap-on --authentication-token-webhook
+        --authorization-mode --client-ca-file --tls-cert-file
+        --tls-private-key-file --read-only-port --port --cluster-dns
+        --cluster-domain --resolv-conf --eviction-hard --eviction-soft
+        --kube-reserved --system-reserved --v --log-dir --log-file
+        --logtostderr --alsologtostderr
+    " -- "${COMP_WORDS[COMP_CWORD]}"))
+}
+
+# --- kubectl ---
+source <(kubectl completion bash)
+
+alias ku=kubectl
+alias k=kubectl
+
+complete -F __start_kubectl ku
+complete -F __start_kubectl k
+
+# --- kubeadm ---
+source <(kubeadm completion bash)
+
+alias adm=kubeadm
+complete -F __start_kubeadm adm
+
+# --- kubelet ---
+alias let=kubelet
+complete -F _kubelet_custom_complete let
+
+# --- Quick Aliases ---
+alias kgp='kubectl get pods -o wide'
+alias kgs='kubectl get svc -o wide'
+alias kgn='kubectl get nodes -o wide'
+alias kga='kubectl get all -o wide'
+alias kgd='kubectl get deployments -o wide'
+
+alias kl='kubectl logs'
+alias klf='kubectl logs -f'
+
+alias kaf='kubectl apply -f'
+alias kdf='kubectl delete -f'
+
+alias kex='kubectl exec -it'
+
+# --- Namespace Helpers ---
+alias ksys='kubectl -n kube-system'
+
+kns () {
+  kubectl config set-context --current --namespace=$1
+  echo "Switched to namespace: $1"
+}
+
+EOF
